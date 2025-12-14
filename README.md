@@ -14,7 +14,6 @@ npm install
 npm start
 ```
 
-Приложение откроется в браузере по адресу [http://localhost:3000](http://localhost:3000)
 
 ## Сборка для продакшена
 
