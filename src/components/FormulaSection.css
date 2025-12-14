@@ -1,0 +1,161 @@
+.formula-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto 20px;
+  padding: 20px;
+  background: rgba(248, 248, 248, 0.9);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.formula-input-container h3 {
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.formula-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#formulaInput {
+  flex: 1;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #2D8C8C;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+#formulaInput:focus {
+  outline: none;
+  border-color: #35B5B5;
+  box-shadow: 0 0 0 2px rgba(53, 181, 181, 0.2);
+}
+
+#applyFormula, #clearFormula {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 14px;
+}
+
+#applyFormula {
+  background: linear-gradient(135deg, #3fb76f, #309a53);
+}
+
+#applyFormula:hover {
+  background: linear-gradient(135deg, #359e5f, #288146);
+  transform: translateY(-1px);
+}
+
+#clearFormula {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+#clearFormula:hover {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  transform: translateY(-1px);
+}
+
+.formula-preview {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  min-height: 40px;
+  border: 1px solid #ddd;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#formulaDisplay {
+  text-align: center;
+  color: #666;
+}
+
+#formulaDisplay math {
+  font-family: "Times New Roman", "STIX Two Math", serif;
+  font-size: 22px;
+  line-height: 1.3;
+  display: inline-block;
+  color: #111;
+}
+
+.formula-examples {
+  color: #333;
+  font-size: 13px;
+}
+
+.formula-examples strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.formula-examples ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.formula-examples li {
+  margin-bottom: 4px;
+  font-family: "Courier New", monospace;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .formula-section {
+    padding: 15px;
+    margin: 20px auto 15px;
+  }
+  
+  .formula-controls {
+    flex-direction: column;
+  }
+  
+  #formulaInput {
+    min-width: 100%;
+  }
+  
+  .formula-examples ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .formula-examples li {
+    margin-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .formula-section {
+    padding: 15px;
+  }
+}
+

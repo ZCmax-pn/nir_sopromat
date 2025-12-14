@@ -1,0 +1,79 @@
+.buttons-opora {
+  display: none;
+  position: fixed;
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  gap: 8px;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+}
+
+.buttons-opora.visible {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.opora-btn {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  background: #fff;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.opora-btn:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.opora-btn:hover .opora-icon {
+  filter: brightness(0) invert(1);
+}
+
+.opora-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  filter: brightness(0);
+  transition: filter 0.2s ease;
+}
+
+@media (max-width: 480px) {
+  .buttons-opora {
+    min-width: 180px;
+  }
+  
+  .opora-btn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+

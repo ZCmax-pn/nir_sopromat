@@ -1,0 +1,112 @@
+.mobile-menu {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-105%);
+  opacity: 0;
+  pointer-events: none;
+  width: 280px;
+  height: 100vh;
+  background: #f8f8f8;
+  z-index: 1002;
+  padding: 80px 20px 20px;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  will-change: transform, opacity;
+  flex-direction: column;
+  gap: 15px;
+  border-right: 2px solid #ddd;
+}
+
+.mobile-menu.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #333;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-close:hover {
+  transform: rotate(90deg);
+}
+
+.clean, .text-download-json, .calculation {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-width: 140px;
+  color: white;
+}
+
+.clean {
+  background: linear-gradient(135deg, #2D8C8C, #1A6B6B);
+  border: 1px solid #3A9A9A;
+}
+
+.clean:hover {
+  background: linear-gradient(135deg, #228282, #196565);
+  transform: translateY(-1px);
+}
+
+.text-download-json {
+  background: linear-gradient(135deg, #2AA8A8, #1E7E7E);
+  border: 1px solid #35B5B5;
+}
+
+.text-download-json:hover {
+  background: linear-gradient(135deg, #228282, #196565);
+  transform: translateY(-1px);
+}
+
+.calculation {
+  background: linear-gradient(135deg, #3fb76f, #309a53);
+  border: 1px solid #55c76a;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 28px;
+}
+
+.calculation:hover {
+  background: linear-gradient(135deg, #359e5f, #288146);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .mobile-menu {
+    width: 250px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .clean:hover, .text-download-json:hover, .calculation:hover {
+    transform: none;
+  }
+  
+  .clean:active, .text-download-json:active, .calculation:active {
+    transform: scale(0.98);
+  }
+}
+
