@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Sopromat</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="header-text">Расчёт статически определимых рам и балок</h1>
+    </div>
+
+    <div class="main-container">
+        <!-- Система координат -->
+        <div class="coordinate-system" id="coordinateSystem">
+            <div class="coordinate-info">
+                <div class="coordinate-origin">
+                    <span class="coordinate-label">Начало (0,0)</span>
+                </div>
+                <div class="coordinate-grid">
+                    <div class="grid-line x-axis"></div>
+                    <div class="grid-line y-axis"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="buttons-opora" id="point-controls">
+                <button class="opora-btn" data-type="support1">
+                    <img src="./images/Group 1.svg" alt="Шарнирно-неподвижная опора" class="opora-icon">
+                    Шарнирно-неподвижная
+                </button>
+                <button class="opora-btn" data-type="support2">
+                    <img src="./images/Group 2.svg" alt="Шарнирно-подвижная опора" class="opora-icon">
+                    Шарнирно-подвижная
+                </button>
+                <button class="opora-btn" data-type="support3">
+                    <img src="./images/Group 3.svg" alt="Жесткая заделка" class="opora-icon">
+                    Жесткая заделка
+                </button>
+                <button class="opora-btn" data-type="support4">
+                    <img src="./images/Ellipse 3.svg" alt="Врезанный шарнир" class="opora-icon">
+                    Врезанный шарнир
+                </button>
+                <button class="opora-btn" data-type="beam">
+                    Соединить точки
+                </button>
+            </div>
+        </div>
+
+        <div class="workspace">
+            <div class="burger-wrapper">
+                <div class="burger-menu" id="burgerMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <button class="clean">Очистить всё</button>
+                    <button class="text-download-json">Сохранить расчет в виде Json</button>
+                    <button class="calculation">Выполнить расчет</button>
+                    <div class="mobile-menu-close" id="mobileMenuClose">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+            <canvas id="constructionCanvas"></canvas>
+            <!-- Индикатор текущих координат -->
+            <div class="coordinates-indicator" id="coordinatesIndicator">
+                X: 0 мм, Y: 0 мм
+            </div>
+        </div>
+
+        <!-- Добавленная секция для ввода формул -->
+        <div class="formula-section">
+            <div class="formula-input-container">
+                <h3>Уравнение балки</h3>
+                <div class="formula-controls">
+                    <input type="text" id="formulaInput" placeholder="Введите уравнение (например: y = 2*x^2 + 3*x - 5)">
+                    <button id="applyFormula">Применить</button>
+                    <button id="clearFormula">Очистить</button>
+                </div>
+                <div class="formula-preview">
+                    <div id="formulaDisplay">Формула не задана</div>
+                </div>
+                <div class="formula-examples">
+                    <strong>Примеры:</strong>
+                    <ul>
+                        <li>y = 2*x^2 + 3*x - 5</li>
+                        <li>y = sin(x) + cos(2*x)</li>
+                        <li>y = 0.001*x^3 - 0.1*x</li>
+                        <li>y = 0.0001*(x^4 - 2*x^3 + x)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция результатов расчета -->
+        <div class="results-section" id="resultsSection">
+            <h3>Результаты расчета</h3>
+            <div class="results-content" id="resultsContent">
+                <p>Расчет не выполнен</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

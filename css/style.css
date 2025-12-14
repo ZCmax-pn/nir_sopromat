@@ -1,0 +1,789 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #073131;
+    min-height: 100vh;
+    font-family: "Manrope", sans-serif;
+}
+.header-text{
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0;
+}
+.line-header{
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    padding: 20px;
+}
+.clean, .text-download-json, .calculation{
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    min-width: 140px;
+    color: white;
+}
+
+.clean {
+    background: linear-gradient(135deg, #2D8C8C, #1A6B6B);
+    border: 1px solid #3A9A9A;
+}
+
+.clean:hover {
+    background: linear-gradient(135deg, #228282, #196565);
+    transform: translateY(-1px);
+}
+.text-download-json {
+    background: linear-gradient(135deg, #2AA8A8, #1E7E7E);
+    border: 1px solid #35B5B5;
+}
+.text-download-json:hover {
+    background: linear-gradient(135deg, #228282, #196565);
+    transform: translateY(-1px);
+}
+.calculation {
+    background: linear-gradient(135deg, #3fb76f, #309a53);
+    border: 1px solid #55c76a;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 28px;
+}
+.calculation:hover {
+    background: linear-gradient(135deg, #359e5f, #288146);
+    transform: translateY(-1px);
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    gap: 30px;
+}
+
+/* Скрытое меню опор */
+.buttons-opora {
+    display: none;
+    position: fixed;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    gap: 8px;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+}
+
+.buttons-opora.visible {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.opora-btn {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 13px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.opora-btn:hover {
+    background: #007bff;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.opora-btn:hover .opora-icon {
+    filter: brightness(0) invert(1);
+}
+
+.opora-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    filter: brightness(0);
+    transition: filter 0.2s ease;
+}
+
+/* Рабочая область */
+.workspace {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.burger-wrapper{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.burger-wrapper .burger-menu,
+.burger-wrapper .mobile-menu{
+    pointer-events: auto;
+}
+
+#constructionCanvas {
+    background: white;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: crosshair;
+    width: 100%;
+    height: 100%;
+}
+
+.controls-section {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Стили для секции формул */
+.formula-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.formula-input-container h3 {
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.formula-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#formulaInput {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 1px solid #2D8C8C;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.95);
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+#formulaInput:focus {
+    outline: none;
+    border-color: #35B5B5;
+    box-shadow: 0 0 0 2px rgba(53, 181, 181, 0.2);
+}
+
+#applyFormula, #clearFormula {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 14px;
+}
+
+#applyFormula {
+    background: linear-gradient(135deg, #3fb76f, #309a53);
+}
+
+#applyFormula:hover {
+    background: linear-gradient(135deg, #359e5f, #288146);
+    transform: translateY(-1px);
+}
+
+#clearFormula {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+#clearFormula:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-1px);
+}
+
+.formula-preview {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    min-height: 40px;
+    border: 1px solid #ddd;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#formulaDisplay {
+    text-align: center;
+    color: #666;
+}
+
+/* Стили для MathML, чтобы отображалось как в mathdf */
+#formulaDisplay math {
+    font-family: "Times New Roman", "STIX Two Math", serif;
+    font-size: 22px;
+    line-height: 1.3;
+    display: inline-block;
+    color: #111;
+}
+
+#formulaDisplay mi,
+#formulaDisplay mn,
+#formulaDisplay mo,
+#formulaDisplay mfrac,
+#formulaDisplay msup,
+#formulaDisplay msub,
+#formulaDisplay mrow {
+    font-family: "Times New Roman", "STIX Two Math", serif;
+}
+
+.formula-examples {
+    color: white;
+    font-size: 13px;
+}
+
+.formula-examples strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.formula-examples ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.formula-examples li {
+    margin-bottom: 4px;
+    font-family: "Courier New", monospace;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Стили для секции результатов */
+.results-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: none;
+}
+
+.results-section.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.results-section h3 {
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.results-content {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-family: "Manrope", sans-serif;
+}
+
+.result-item {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    border-left: 4px solid #2D8C8C;
+}
+
+.result-item strong {
+    color: #2D8C8C;
+}
+
+.result-warning {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    color: #856404;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.result-error {
+    background: #f8d7da;
+    border-left: 4px solid #dc3545;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.result-feedback {
+    background: #e6ffed;
+    border-left: 4px solid #28a745;
+    color: #155724;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.forces-diagram {
+    margin-top: 15px;
+    padding: 15px;
+    background: #e9ecef;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+}
+
+.diagram-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2D8C8C;
+}
+
+/* ... существующие стили ... */
+
+/* Бургер меню */
+.burger-menu {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
+    background: linear-gradient(135deg, #2D8C8C, #1A6B6B);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.burger-menu:hover {
+    background: linear-gradient(135deg, #228282, #196565);
+    transform: scale(1.05);
+}
+
+.burger-menu i {
+    color: white;
+    font-size: 24px;
+}
+
+/* Мобильное меню */
+.mobile-menu {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-105%);
+    opacity: 0;
+    pointer-events: none;
+    width: 280px;
+    height: 100vh;
+    background: #073131;
+    z-index: 1002;
+    padding: 80px 20px 20px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    will-change: transform, opacity;
+    flex-direction: column;
+    gap: 15px;
+    border-right: 2px solid #2D8C8C;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-close:hover {
+    transform: rotate(90deg);
+}
+
+/* Десктопные кнопки */
+.desktop-buttons {
+    display: none;
+}
+
+/* Система координат */
+.coordinate-system {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border: 1px solid #2D8C8C;
+    min-width: 150px;
+}
+
+.coordinate-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.coordinate-origin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coordinate-label {
+    font-size: 12px;
+    color: #2D8C8C;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.coordinate-grid {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-line {
+    position: absolute;
+    background: #2D8C8C;
+}
+
+.x-axis {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.y-axis {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.x-axis::after {
+    content: '→';
+    position: absolute;
+    right: -5px;
+    top: -8px;
+    color: #2D8C8C;
+    font-size: 12px;
+}
+
+.y-axis::after {
+    content: '↑';
+    position: absolute;
+    left: -3px;
+    top: -10px;
+    color: #2D8C8C;
+    font-size: 12px;
+}
+
+/* Индикатор координат */
+.coordinates-indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Редактор длины балки */
+.beam-length-editor {
+    background: white;
+    border: 2px solid #2D8C8C;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Manrope", sans-serif;
+}
+
+.beam-length-editor input {
+    width: 80px;
+    padding: 5px 10px;
+    border: 1px solid #2D8C8C;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.beam-length-editor span {
+    color: #2D8C8C;
+    font-weight: 600;
+}
+
+.beam-length-editor button {
+    background: #2D8C8C;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.beam-length-editor button.apply-btn {
+    background: #3fb76f;
+}
+
+.beam-length-editor button.cancel-btn {
+    background: #e74c3c;
+}
+
+.beam-length-editor button:hover {
+    opacity: 0.9;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .line-header {
+        gap: 100px;
+    }
+}
+
+@media (max-width: 992px) {
+    .line-header {
+        gap: 50px;
+        padding: 15px;
+    }
+    
+    .header-text {
+        font-size: 28px;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .burger-wrapper{
+        left: 0;
+        top: 5px;
+    }
+    .burger-menu {
+        position: absolute;
+    }
+    .mobile-menu {
+        position: fixed;
+    }
+    .line-header {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-right: 20px;
+        gap: 0;
+    }
+    
+    .header-text {
+        font-size: 24px;
+        padding: 0 15px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 20px;
+    }
+    
+    .workspace {
+        height: 60vh;
+        margin-top: 20px;
+    }
+    
+    .formula-controls {
+        flex-direction: column;
+    }
+    
+    #formulaInput {
+        min-width: 100%;
+    }
+    
+    .formula-examples ul {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .formula-examples li {
+        margin-right: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .coordinate-system {
+        top: 70px;
+        right: 10px;
+        padding: 8px 12px;
+        min-width: 130px;
+    }
+    
+    .coordinate-info {
+        gap: 10px;
+    }
+    
+    .coordinate-grid {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-text {
+        font-size: 20px;
+        margin-top: 70px;
+    }
+    
+    .workspace {
+        height: 50vh;
+    }
+    
+    .buttons-opora {
+        min-width: 180px;
+    }
+    
+    .opora-btn {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+    
+    .coordinate-system {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 0 auto 15px;
+        width: 90%;
+    }
+    
+    .mobile-menu {
+        width: 250px;
+    }
+    
+    .formula-section {
+        padding: 15px;
+    }
+    
+    .results-section {
+        padding: 15px;
+    }
+}
+
+@media (max-height: 600px) {
+    .workspace {
+        height: 50vh;
+    }
+    
+    .header-text {
+        margin-top: 50px;
+        font-size: 20px;
+    }
+}
+
+/* Стили для touch-устройств */
+@media (hover: none) and (pointer: coarse) {
+    .opora-btn:hover {
+        background: #fff;
+        color: #333;
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .opora-btn:active {
+        background: #007bff;
+        color: white;
+        transform: scale(0.98);
+    }
+    
+    .clean:hover, .text-download-json:hover, .calculation:hover,
+    #applyFormula:hover, #clearFormula:hover {
+        transform: none;
+    }
+    
+    .clean:active, .text-download-json:active, .calculation:active,
+    #applyFormula:active, #clearFormula:active {
+        transform: scale(0.98);
+    }
+}
